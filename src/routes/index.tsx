@@ -1,24 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+import { HomePage, SiteShell } from "@/components/saxon-site";
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({ meta: [{ title: "Saxon Roofing & Sons | Roofers in Doncaster" },{ name:"description",content:"Family-run roofing company serving Doncaster, South Yorkshire and surrounding areas. Roof repairs, new roofs, flat roofing and free quotes."},{property:"og:title",content:"Saxon Roofing & Sons | Roofers in Doncaster"},{property:"og:description",content:"Quality roofing workmanship across South Yorkshire and surrounding areas."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"},{property:"og:url",content:"/"}],links:[{rel:"canonical",href:"/"}], scripts:[{type:"application/ld+json",children:JSON.stringify({"@context":"https://schema.org","@type":"RoofingContractor",name:"Saxon Roofing & Sons",telephone:"+44 7796 545971",email:"saxonroofingsons@hotmail.com",url:"https://saxonroofing.co.uk",address:{"@type":"PostalAddress",streetAddress:"421 Broadway",addressLocality:"Doncaster",postalCode:"DN7 4HX",addressCountry:"GB"},areaServed:"South Yorkshire"})}]}),
+  component: () => <SiteShell><HomePage/></SiteShell>,
 });
-
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
